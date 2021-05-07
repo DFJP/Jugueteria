@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jugueteria.UI", "Jugueteria.UI\Jugueteria.UI.csproj", "{89F152E9-4181-4C39-9DA4-22ED2299B6F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89F152E9-4181-4C39-9DA4-22ED2299B6F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F152E9-4181-4C39-9DA4-22ED2299B6F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F152E9-4181-4C39-9DA4-22ED2299B6F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F152E9-4181-4C39-9DA4-22ED2299B6F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {312172AA-DBD5-4DFA-9DA4-1721162A9B04}
+	EndGlobalSection
+EndGlobal
