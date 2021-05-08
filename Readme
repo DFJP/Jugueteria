@@ -1,0 +1,35 @@
+Pasos para configurar los proyectos y compilar
+
+Proyecto Jugueteria.API
+
+1. Instalar Paquetes
+Microsoft.EntityFrameworkCore(5.0.5)
+Microsoft.EntityFrameworkCore.SqlServer(5.0.5)
+Microsoft.EntityFrameworkCore.Tools(5.0.5)
+
+2. Modificar cadena de conexión en el archivo appsettings.json
+
+3. Crear Migraciones 
+
+
+Proyecto Jugueteria.UI
+
+1. Modificar Url de API
+
+
+Solucion Jugueteria
+
+1. Propiedades Solucion -> Proyecto de inicio
+
+2. Seleccionar (Proyectos de inicio múltiples)
+
+3. En cada proyecto modificar su Acción a "Iniciar"
+
+4. (Opcional) Si se decea que el proyecto API no abra navegador
+	a. Propiedades Jugueteria.API
+	b. Depurar
+	c. Desmarcar casilla "Iniciar explorador"
+
+
+
+
