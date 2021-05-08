@@ -8,7 +8,7 @@
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <h5 class="text-center">¿Desea eliminar de la lista el juguete seleccionado?</h5>
+          <h5 class="text-center">¿Desea eliminar el juguete seleccionado?</h5>
         </div>
       </form>
     </div>
@@ -33,9 +33,9 @@
         <div class="col-lg-6 offset-lg-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="titulo">AGREGAR JUGUETE</h5>
+                    <h5 class="titulo">{{accion | uppercase}} JUGUETE</h5>
 
-                    <form [formGroup]="form" (ngSubmit)="agregarJuguete()">
+                    <form [formGroup]="form" (ngSubmit)="guardarJuguete()">
                         <div class="input-group mb-3">
                             <span class="input-group-text">
                                 <i class="fas fa-robot"
@@ -50,7 +50,7 @@
                                 [class.green-icon]="this.form.get('precio')?.valid"
                                 [class.red-icon]="this.form.get('precio')?.invalid && this.form.get('precio')?.touched"></i>
                             </span>
-                            <input formControlName="precio" type="number" min="1" max="1000" step="0.1" class="form-control" placeholder="Precio">
+                            <input formControlName="precio" type="number" min="1" max="1000" step="0.1" maxlength="4" class="form-control" placeholder="Precio">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">
@@ -66,7 +66,7 @@
                                 [class.green-icon]="this.form.get('edad')?.valid"
                                 [class.red-icon]="this.form.get('edad')?.invalid && this.form.get('edad')?.touched"></i>
                             </span>
-                            <input formControlName="edad" type="number" min="0" max="100" class="form-control" placeholder="Edad">
+                            <input formControlName="edad" type="number" min="0" max="100" maxlength="3" class="form-control" placeholder="Edad">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">
@@ -91,18 +91,27 @@
                 <div class="card-body">
                     <h5 class="titulo">LISTA DE JUGUETES</h5>
                     <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Edad</td>                                
+                                <td>Nombre</td>
+                                <td>Precio</td>
+                                <td>Compañia</td>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr *ngFor="let juguete of listaJuguetes; let i = index">
+                            <tr *ngFor="let juguete of listaJuguetes">
                                 <td>{{juguete.id}}</td>
-                                <td>{{juguete.edad}}</td>                                
+                                <td>{{juguete.restriccionEdad}}</td>                                
                                 <td>{{juguete.nombre}}</td>
-                                <td>{{juguete.precio}}</td>
+                                <td>${{juguete.precio}}</td>
                                 <td>{{juguete.compania}}</td>
                                 <td>
-                                    <i class="fas fa-edit text-info"></i>
+                                    <i (click)="editarJuguete(juguete)" class="fas fa-edit text-info"></i>
                                 </td>
                                 <td>
-                                    <i (click)="open(content, i)" class="fas fa-trash-alt text-danger"></i>
+                                    <i (click)="open(content, juguete.id)" class="fas fa-trash-alt text-danger"></i>
                                 </td>
                             </tr>
                         </tbody>
