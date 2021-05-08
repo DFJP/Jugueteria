@@ -1,4 +1,5 @@
 ﻿using Jugueteria.API.Models;
+using Jugueteria.API.RepositoriesInterface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,19 +15,19 @@ namespace Jugueteria.API.Controllers
     [ApiController]
     public class JugueteController : ControllerBase
     {
-        private readonly AplicationDbContext _context;
-        public JugueteController(AplicationDbContext context)
+        private readonly IJugueteRepository _jugueteRepository;
+        public JugueteController(IJugueteRepository jugueteRepository)
         {
-            _context = context;
+            _jugueteRepository = jugueteRepository;
         }
 
         // GET: api/<JugueteController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             try
             {
-                var listaJuguetes = await _context.Juguete.ToListAsync();
+                var listaJuguetes =  _jugueteRepository.GetAll();
                 return Ok(listaJuguetes);
             }
             catch (Exception ex)
@@ -38,13 +39,12 @@ namespace Jugueteria.API.Controllers
         
         // POST api/<JugueteController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Juguete juguete)
+        public  IActionResult Post([FromBody] Juguete juguete)
         {
             try
             {
-                _context.Add(juguete);
-                await _context.SaveChangesAsync();
-                return Ok(juguete);
+                var j =  _jugueteRepository.Insert(juguete);
+                return Ok(j);
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace Jugueteria.API.Controllers
 
         // PUT api/<JugueteController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Juguete juguete)
+        public IActionResult Put(int id, [FromBody] Juguete juguete)
         {
             try
             {
@@ -63,9 +63,9 @@ namespace Jugueteria.API.Controllers
                     return NotFound();
                 }
 
-                _context.Update(juguete);
-                await _context.SaveChangesAsync();
-                return Ok(new { message = "El Juguete fue actualizado correctamente"});
+                _jugueteRepository.Update(juguete);
+
+                return Ok(new { message = $"El Juguete {juguete.Nombre} fue actualizado correctamente"});
             }
             catch (Exception ex)
             {
@@ -75,19 +75,11 @@ namespace Jugueteria.API.Controllers
 
         // DELETE api/<JugueteController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
-                var juguete = await _context.Juguete.FindAsync(id);
-
-                if(juguete == null)
-                {
-                    return NotFound();
-                }
-
-                _context.Remove(juguete);
-                await _context.SaveChangesAsync();
+                _jugueteRepository.Delete(id);
                 return Ok(new { message = "El Juguete se elimino correctamente" });
             }
             catch (Exception ex)

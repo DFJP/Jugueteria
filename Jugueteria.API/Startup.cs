@@ -1,3 +1,5 @@
+using Jugueteria.API.Repositories;
+using Jugueteria.API.RepositoriesInterface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +37,8 @@ namespace Jugueteria.API
             });
 
             services.AddDbContext<AplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            services.AddScoped<IJugueteRepository, JugueteRepository>();
 
             services.AddCors(options => options.AddPolicy("AllowWebApp",
                                             builder => builder.AllowAnyOrigin()
